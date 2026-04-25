@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F7F6F2">
+<title>Filip · Sprintplan 2026</title>
+<style>
+:root{
+  --bg:#F7F6F2;--bg2:#FFFFFF;--bg3:#EFEDE8;--bg4:#E8E5DD;
+  --text:#16150F;--text2:#6B6860;--text3:#A8A59E;
+  --border:rgba(0,0,0,0.09);--border-d:rgba(0,0,0,0.18);
+  --purple:#7F77DD;--purple-l:#EEEDFE;--purple-d:#3C3489;
+  --green:#16A34A;--green-l:#DCFCE7;--green-d:#14532D;
+  --blue:#2563EB;--blue-l:#EFF6FF;--blue-d:#1E3A8A;
+  --red:#DC2626;--red-l:#FEE2E2;--red-d:#7F1D1D;
+  --amber:#D97706;--amber-l:#FFFBEB;--amber-d:#78350F;
+  --teal:#0D9488;--teal-l:#F0FDFA;
+  --shadow:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.55;font-size:14px;-webkit-font-smoothing:antialiased}
+body{padding-bottom:env(safe-area-inset-bottom)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea{font-family:inherit;font-size:14px}
+
+/* LAYOUT */
+.page{max-width:1200px;margin:0 auto;padding:20px 16px 80px;min-height:100vh}
+@media(min-width:768px){.page{padding:32px 24px 80px}}
+
+/* HEADER */
+.topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap}
+.brand h1{font-size:20px;font-weight:700;letter-spacing:-.3px;line-height:1.2}
+.brand .date{font-size:12px;color:var(--text2);margin-top:2px}
+@media(min-width:768px){.brand h1{font-size:22px}.brand .date{font-size:13px}}
+
+/* TABS */
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;background:var(--bg2);border:0.5px solid var(--border);color:var(--text2);transition:all .15s ease;white-space:nowrap}
+.tab:hover{background:var(--bg3)}
+.tab.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+@media(min-width:768px){.tab{padding:8px 16px;font-size:13px}}
+
+/* DAY NAV */
+.day-nav{display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:16px;box-shadow:var(--shadow)}
+.day-nav-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--bg3);font-size:16px;font-weight:600;color:var(--text);transition:background .15s}
+.day-nav-btn:hover{background:var(--bg4)}
+.day-nav-btn:disabled{opacity:.3;cursor:not-allowed}
+.day-nav-info{text-align:center;flex:1}
+.day-nav-day{font-size:14px;font-weight:700}
+.day-nav-week{font-size:11px;color:var(--text2);margin-top:1px}
+.today-jump{font-size:11px;color:var(--blue);font-weight:600;margin-top:2px}
+
+/* DUAL COL on desktop */
+.day-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:900px){.day-grid{grid-template-columns:1fr 1fr;gap:18px}}
+
+/* CARD */
+.card{background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.card-head{padding:11px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-bottom:0.5px solid var(--border)}
+.ch-train{background:var(--purple-l);color:var(--purple-d)}
+.ch-food{background:var(--green-l);color:var(--green-d)}
+.ch-stev{background:var(--red-l);color:var(--red-d)}
+.ch-info{background:var(--blue-l);color:var(--blue-d)}
+.ch-amber{background:var(--amber-l);color:var(--amber-d)}
+.card-body{padding:16px}
+
+/* TAGS */
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:14px;letter-spacing:.04em;margin-right:4px;margin-bottom:4px}
+.tag-bygg{background:var(--blue-l);color:var(--blue-d)}
+.tag-fart{background:var(--purple-l);color:var(--purple-d)}
+.tag-comp{background:var(--green-l);color:var(--green-d)}
+.tag-peak{background:var(--amber-l);color:var(--amber-d)}
+.tag-reload{background:var(--bg3);color:var(--text2)}
+.tag-stev{background:var(--red);color:#fff}
+.tag-opt{background:#FEF3C7;color:#78350F}
+
+/* WORKOUT BOX */
+.wo{background:var(--bg2);border-left:3px solid var(--purple);border-radius:0 8px 8px 0;padding:12px 14px;margin-bottom:10px}
+.wo-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--purple-d);margin-bottom:4px}
+.wo-detail{font-size:13px;line-height:1.65;color:var(--text)}
+.wo-detail b{color:var(--text)}
+.wo-note{font-size:12px;color:var(--text2);margin-top:6px;font-style:italic}
+
+/* MEAL ROW */
+.meal{padding:10px 0;border-bottom:0.5px solid var(--border)}
+.meal:last-child{border-bottom:none;padding-bottom:0}
+.meal:first-child{padding-top:0}
+.meal-time{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.05em;margin-bottom:2px}
+.meal-name{font-weight:700;font-size:13px;margin-bottom:2px;color:var(--text)}
+.meal-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.meal-suppl{display:inline-block;font-size:10px;font-weight:600;background:#EDE9FE;color:#4C1D95;border-radius:4px;padding:2px 7px;margin-top:4px}
+
+/* MACROS */
+.macros{display:grid;grid-template-columns:repeat(4,1fr);border-top:0.5px solid var(--border);margin-top:12px;padding-top:10px;gap:8px}
+.macro{text-align:center}
+.macro-val{font-size:16px;font-weight:700;line-height:1.1}
+.macro-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);margin-top:1px}
+.mp .macro-val{color:#C2410C}
+.mk .macro-val{color:#1D4ED8}
+.mf .macro-val{color:#15803D}
+.mc .macro-val{color:var(--text)}
+
+/* BANNER */
+.banner{background:var(--text);color:var(--bg);border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--shadow-md)}
+.banner-info .lbl{font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:.05em;text-transform:uppercase}
+.banner-info .title{font-size:15px;font-weight:700;margin-top:2px}
+.banner-info .meta{font-size:12px;color:rgba(255,255,255,0.7);margin-top:2px}
+.banner-cta{font-size:13px;font-weight:600;color:var(--bg)}
+
+/* STEVNE COUNTDOWN */
+.countdown-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:14px}
+@media(min-width:600px){.countdown-grid{grid-template-columns:1fr 1fr 1fr}}
+.cd{background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;padding:12px 14px;text-align:center;box-shadow:var(--shadow)}
+.cd-days{font-size:24px;font-weight:700;line-height:1}
+.cd-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-top:3px}
+.cd-name{font-size:11px;font-weight:600;color:var(--text2);margin-top:5px}
+.cd-date{font-size:10px;color:var(--text3);margin-top:1px}
+.cd.hov{background:var(--text);color:var(--bg)}
+.cd.hov .cd-lbl,.cd.hov .cd-name,.cd.hov .cd-date{color:rgba(255,255,255,0.7)}
+.cd.hov .cd-days{color:#FCA5A5}
+
+/* SEASON OVERVIEW */
+.week-row{background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:14px}
+.week-row:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.week-num{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.06em;min-width:50px}
+.week-info{flex:1;min-width:0}
+.week-dates{font-size:13px;font-weight:700;line-height:1.3}
+.week-focus{font-size:11px;color:var(--text2);margin-top:2px}
+.week-marker{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.week-row.current{border-color:var(--purple);background:var(--purple-l);border-width:1px}
+.week-row.has-stevne{border-left:3px solid var(--red)}
+
+/* PHASE BAR */
+.phase-bar{display:flex;height:6px;background:var(--bg3);border-radius:3px;margin-bottom:18px;overflow:hidden}
+.phase-seg{flex:1;position:relative}
+.phase-seg.bygg{background:var(--blue-l)}
+.phase-seg.fart{background:var(--purple-l)}
+.phase-seg.comp1{background:var(--green-l)}
+.phase-seg.intens{background:#FECACA}
+.phase-seg.reload{background:var(--bg4)}
+.phase-seg.peak{background:var(--amber-l)}
+.phase-seg.current{background:var(--text)}
+
+/* SECTION HEADER */
+.sec-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin:24px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+
+/* PRINCIPLE BOX */
+.princ-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:14px;font-size:12.5px;line-height:1.65;color:var(--purple-d)}
+
+/* DISTANCE GRID */
+.dist-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+@media(min-width:600px){.dist-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.dist-grid{grid-template-columns:repeat(6,1fr)}}
+.dist{background:var(--bg2);border:0.5px solid var(--border);border-radius:8px;padding:10px;text-align:center;box-shadow:var(--shadow)}
+.dist-num{font-size:18px;font-weight:700;line-height:1}
+.dist-pct{font-size:10px;color:var(--text2);margin-top:4px;font-weight:600}
+.dist-pause{font-size:9px;color:var(--text3);margin-top:1px}
+
+/* TABLE */
+.t{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px;border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
+.t th{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);padding:8px 10px;border-bottom:1px solid var(--border);text-align:left;background:var(--bg3)}
+.t td{padding:8px 10px;border-bottom:0.5px solid var(--border);vertical-align:top;line-height:1.55}
+.t tr:last-child td{border-bottom:none}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;display:none;align-items:flex-end;justify-content:center}
+@media(min-width:768px){.modal-bg{align-items:center}}
+.modal-bg.open{display:flex}
+.modal{background:var(--bg);border-radius:18px 18px 0 0;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:20px;box-shadow:0 -8px 32px rgba(0,0,0,0.2)}
+@media(min-width:768px){.modal{border-radius:18px}}
+.modal-close{position:sticky;top:0;float:right;width:32px;height:32px;border-radius:50%;background:var(--bg3);font-size:18px;display:flex;align-items:center;justify-content:center;margin-left:auto;margin-bottom:8px;font-weight:600}
+
+/* SJURLOG BANNER */
+.sjurlog-link{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--blue);color:#fff;border-radius:12px;padding:14px 18px;margin-top:16px;text-decoration:none;box-shadow:var(--shadow-md);transition:transform .15s ease, box-shadow .15s ease}
+.sjurlog-link:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(37,99,235,0.25)}
+.sjurlog-link:active{transform:translateY(0)}
+.sjurlog-info .lbl{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.sjurlog-info .meta{font-size:11px;color:rgba(255,255,255,0.75);margin-top:2px}
+.sjurlog-arrow{font-size:18px;font-weight:600}
+
+/* HIDDEN */
+.hidden{display:none !important}
+
+/* RESPONSIVE TWEAKS */
+@media(max-width:600px){
+  .day-nav{padding:8px 12px}
+  .day-nav-btn{width:32px;height:32px;font-size:14px}
+  .card-body{padding:14px}
+  .meal-name{font-size:12.5px}
+  .macro-val{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="topbar">
+  <div class="brand">
+    <h1>Filip · Sprintplan 2026</h1>
+    <div class="date" id="brandDate"></div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-view="today">I dag</button>
+    <button class="tab" data-view="season">Sesong</button>
+    <button class="tab" data-view="kost">Kostplan</button>
+  </div>
+</div>
+
+<!-- TODAY VIEW -->
+<div id="view-today" class="view">
+  
+  <!-- DAY NAVIGATION -->
+  <div class="day-nav">
+    <button class="day-nav-btn" id="prevDay">‹</button>
+    <div class="day-nav-info">
+      <div class="day-nav-day" id="navDay">—</div>
+      <div class="day-nav-week" id="navWeek">—</div>
+      <button class="today-jump hidden" id="todayJump">→ Hopp til i dag</button>
+    </div>
+    <button class="day-nav-btn" id="nextDay">›</button>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-grid" id="countdowns"></div>
+
+  <!-- MAIN CONTENT (training + food side by side on desktop) -->
+  <div class="day-grid">
+    
+    <!-- TRAINING -->
+    <div class="card">
+      <div class="card-head ch-train" id="trainHead">DAGENS TRENING</div>
+      <div class="card-body" id="trainBody"></div>
+    </div>
+
+    <!-- FOOD -->
+    <div class="card">
+      <div class="card-head ch-food">DAGENS KOSTPLAN</div>
+      <div class="card-body" id="foodBody"></div>
+    </div>
+    
+  </div>
+
+  <!-- SJURLOG LINK -->
+  <a href="https://sjurlog.com/#calendar" target="_blank" rel="noopener" class="sjurlog-link" id="sjurlogLink">
+    <div class="sjurlog-info">
+      <div class="lbl">📒 Logg dagens økt i Sjurlog</div>
+      <div class="meta">Trykk for å opne treningslogg</div>
+    </div>
+    <div class="sjurlog-arrow">→</div>
+  </a>
+
+</div>
+
+<!-- SEASON VIEW -->
+<div id="view-season" class="view hidden">
+  <div class="sec-h">Sesong 2026 — bølgestruktur mot Lillehammer</div>
+  <div class="phase-bar" id="phaseBar"></div>
+  
+  <div class="princ-box">
+    <b>Filosofi:</b> Submaks innsats · rytme · kontinuitet · frech kvar økt. Tre kvalitetsstimuli per veke: tysdag (topphastighet) · torsdag (akselerasjon) · laurdag (fartsbevaring i racekontroll).
+  </div>
+
+  <div class="sec-h">Hovudmål</div>
+  <div class="countdown-grid" id="seasonCountdowns"></div>
+
+  <div class="sec-h">Veke-for-veke</div>
+  <div id="weekList"></div>
+
+  <div class="sec-h">Lørdag — fartsbevaringsdistansar</div>
+  <div class="dist-grid">
+    <div class="dist"><div class="dist-num">80m</div><div class="dist-pct">94–95% av 100m</div><div class="dist-pause">Pause 6–8 min</div></div>
+    <div class="dist"><div class="dist-num">100m</div><div class="dist-pct">93–95% av 100m</div><div class="dist-pause">Pause 7–9 min</div></div>
+    <div class="dist"><div class="dist-num">120m</div><div class="dist-pct">92–94% av 200m</div><div class="dist-pause">Pause 8–10 min</div></div>
+    <div class="dist"><div class="dist-num">150m</div><div class="dist-pct">91–93% av 200m</div><div class="dist-pause">Pause 10–14 min</div></div>
+    <div class="dist"><div class="dist-num">180m</div><div class="dist-pct">90–92% av 200m</div><div class="dist-pause">Pause 14–16 min</div></div>
+    <div class="dist"><div class="dist-num">200m</div><div class="dist-pct">90% av 200m</div><div class="dist-pause">Pause 16+ min</div></div>
+  </div>
+
+  <div class="sec-h">Stevneplan</div>
+  <table class="t" id="stevneTable"></table>
+</div>
+
+<!-- KOST VIEW -->
+<div id="view-kost" class="view hidden">
+  <div class="sec-h">Kostplan — referanse</div>
+  <div class="princ-box">
+    <b>Refluks-tilpassa</b> · Ingen hardkokte egg · Ingen fisk som hovudrett · 2300–2600 kcal/dag · Protein 180–215g (rå) · Karbo 255–310g (kokt)<br>
+    <b>Faste reglar:</b> Fredag = taco · Laurdag = biff · Søndag = tandori (odde) / kjøttkaker (partalsveker)
+  </div>
+
+  <div class="sec-h">Middagsrotasjon — veke A/B/C</div>
+  <div class="princ-box">
+    Veke <span id="currentRotation">—</span> denne veka. Rotasjonen baserast på vekenummer: <b>veke % 3 = 0 → A · 1 → B · 2 → C</b>.
+  </div>
+  <div id="kostRotation"></div>
+
+  <div class="sec-h">Kosttilskot — dagleg timing</div>
+  <table class="t">
+    <tr><th>Tidspunkt</th><th>Tilskot</th><th>Kvifor</th></tr>
+    <tr><td><b>Frokost</b></td><td>Kalsium · Omega-3 · Folsyre · D-vit</td><td>Best med mat. Aldri saman med jern.</td></tr>
+    <tr><td><b>30–60 min før trening</b></td><td>C-vitamin (ekstra)</td><td>Stimulerer kollagensyntese — reduserer skaderisiko.</td></tr>
+    <tr><td><b>Kveld</b></td><td>Magnesium + Jern + lita C-vit</td><td>Søvn + jernabsorpsjon. Aldri med kalsium/mjølkeprodukt.</td></tr>
+  </table>
+
+  <div class="sec-h">⚠️ Aldri saman</div>
+  <div class="princ-box" style="background:var(--red-l);border-left-color:var(--red);color:var(--red-d)">
+    Kalsium + Jern · Kalsium + Magnesium · Jern + Mjølkeprodukt · Jern + Kaffi/te
+  </div>
+
+  <div class="sec-h">Stevnedag-justeringar</div>
+  <div class="princ-box">
+    <b>Lørdag stevne (dag-løp):</b> Frokost 7:30 (havregraut + 2 egg, ikkje stor) · 10:30 banan + skyr · 13:00 lett pasta + kylling · 16:00 banan · race · etterpå: skyr + banan innan 30 min.<br>
+    <b>Reisedag (Finland):</b> Hold protein høgt, karbo moderat. Ta med skyr/yogurt for å sikre måltid. Fly = ekstra væske.
+  </div>
+</div>
+
+<!-- WEEK DETAIL MODAL -->
+<div class="modal-bg" id="weekModal">
+  <div class="modal">
+    <button class="modal-close" id="closeModal">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ============================================
+// SEASON DATA
+// ============================================
+const SEASON_START = new Date('2026-04-13'); // Monday week 16 (week 3 of plan numbering — but using ISO weeks)
+// Plan uses internal week numbers 3-22. Map dates to weeks.
+
+const PLAN = {
+  3: {
+    dates: '13.–19. april', focus: 'Etabler Freelap-baseline · fly inn på 95% · spenst foten',
+    phase: 'bygg', phaseLabel: 'Gjenoppbygging',
+    days: {
+      mon: { type: 'styrke', title: 'Overkropp + aktivering', detail: 'Dips 3×6 · Pullups 3×6 · Ankel/fot · Couch stretch · Legg · Glute-bridge 2×8' },
+      tue: { type: 'fly', title: 'Fly 95% · 4 reps', detail: '4×fly 30m frå 30m innløp. Pause 7–8 min. Treningssko. <b>Etabler Freelap-baseline.</b> Stopp ved hamstring-stramning.' },
+      wed: { type: 'rest', title: 'Kvile' },
+      thu: { type: 'blokk', title: 'Blokk + spenst', detail: '1×10m · 1×20m · 2×30m teknikk. Spenst: lave hink 2×5. Hekkedrills <b>ute</b>.' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Yin yoga 25 min · core A rotasjon' },
+      sat: { type: 'rytme', title: 'Bygg 1a · 180+150+100+80', detail: '1×180m i 90% (200m-pace) · 1×150m i 91% · 1×100m i 93% · 1×80m i 94%. Pause 14 / 13 / 9 / — min. Piggsko. <b>510m total · etabler baseline-tider.</b>' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  4: {
+    dates: '20.–26. april', focus: 'Styrke inn (intro lett) · fly held 95% · første pyramide',
+    phase: 'bygg', phaseLabel: 'Gjenoppbygging',
+    days: {
+      mon: { type: 'styrke', title: 'Overkropp + aktivering', detail: 'Dips 3×6–8 · Pullups 3×6 · Skråbenk 3×5 · Full aktivering' },
+      tue: { type: 'fly', title: 'Fly 95% · 4 reps', detail: '4×fly 30m frå 30m innløp, 95%. Pause 7–8 min. Piggsko. Ingen kamel enno.' },
+      wed: { type: 'styrke', title: 'Styrke intro', detail: 'Smith SL-squat 3×4 lett · Heelboks 3×6 · Calf raise 3×4 sek ×4 · Brutal benk 3×6 · Rygghev 3×8 · Sidehev 3×8' },
+      thu: { type: 'blokk', title: 'Blokk + spenst', detail: '1×10m · 1×20m · 2×30m. Spenst: lave hink 3×5 · boks-eksplosivhopp 2×4 inn.' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program. Core B' },
+      sat: { type: 'rytme', title: 'Bygg 1a · 180+150+100+80', detail: '1×180m i 90% (200m-pace) · 1×150m i 91% · 1×100m i 93% · 1×80m i 94%. Pause 14 / 13 / 9 / — min. Piggsko. <b>510m total.</b>' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  5: {
+    dates: '27. apr – 3. mai', focus: 'Fly opp til 5 reps på 95% · siste veke utan kamel',
+    phase: 'fart', phaseLabel: 'Fartsutvikling',
+    days: {
+      mon: { type: 'styrke', title: 'Overkropp + aktivering', detail: 'Full program' },
+      tue: { type: 'fly', title: 'Fly 95% · 5 reps', detail: '5×fly 30m frå 30m innløp. Pause 7–8 min. Piggsko. Volumtopp på 95%.' },
+      wed: { type: 'styrke', title: 'Styrke bygg', detail: 'Smith 3×5 tyngre · Heelboks 3×7 · Calf 3×5 sek ×4 · Brutal benk 3×6 · Rygghev 3×10 · Sidehev 3×10' },
+      thu: { type: 'blokk', title: 'Blokk + spenst', detail: '1×10m · 1×20m · 3×30m. Spenst: lave hink 3×6 · boks-eksplosivhopp 3×5' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program' },
+      sat: { type: 'rytme', title: 'Bygg 1b · 200+150+100+80', detail: '1×200m i 90% <b>(sett saman distansen)</b> · 1×150m i 91% · 1×100m i 93% · 1×80m i 94%. Pause 16 / 13 / 9 / — min. Piggsko. <b>530m · 200m-test før Framo.</b>' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  6: {
+    dates: '4.–10. mai', focus: '⭐ KAMEL INN 5/5 · 97% × 3 · Holmenkollstafetten 9/5 erstattar lørdag',
+    phase: 'fart', phaseLabel: 'Fartsutvikling + Holmenkoll',
+    days: {
+      mon: { type: 'styrke', title: 'Overkropp + aktivering', detail: 'Full program' },
+      tue: { type: 'fly', title: 'Fly 97% × 3 + 2 kamel 🔥', detail: '3×fly 30m frå 30–32m innløp, 97%. Pause 8–9 min. <b>Etter fly:</b> 2×kamel (15+20+20). Pause 10 min mellom kamel.' },
+      wed: { type: 'styrke', title: 'Styrke topp', detail: 'Smith 3×5 tyngste · Heelboks 3×8 · Calf 3×6 sek ×4 · Brutal benk 3×8 · Rygghev/Sidehev 3×10' },
+      thu: { type: 'blokk', title: 'Blokk + spenst (lett før HK)', detail: '1×10 · 1×20 · 2×30m. Spenst: boks-eksplosivhopp 2×5. <b>Lågare volum — Holmenkoll lørdag.</b>' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program' },
+      sat: { type: 'stev', title: '🏁 Holmenkollstafetten — siste etappe', detail: 'Race. Erstattar lørdagsøkta. Race-stimuli.', stevne: true },
+      sun: { type: 'rest', title: 'Kvile etter stafetten' }
+    }
+  },
+  7: {
+    dates: '11.–17. mai', focus: '⚡ HARDASTE VEKE — fly 97% × 4 · siste hink-veke · styrke maks',
+    phase: 'fart', phaseLabel: 'Toppveke 1',
+    days: {
+      mon: { type: 'styrke', title: 'Overkropp + aktivering', detail: 'Full program. Bruk ekstra tid.' },
+      tue: { type: 'fly', title: 'Fly 97% × 4 + 2 kamel', detail: '4×fly 30m frå 30–32m innløp. Pause 8–9 min. Etter: 2×kamel. <b>Hardaste tirsdag i sesongen.</b>' },
+      wed: { type: 'styrke', title: 'Styrke maks', detail: 'Smith 3×5 maks · Heelboks 3×8 tyngre · Calf 3×7 sek · Brutal benk 3×8 · Rygghev/Sidehev 3×10' },
+      thu: { type: 'blokk', title: 'Blokk + spenst SISTE', detail: '1×10 · 1×20 · 3×30m. Spenst: lave hink 3×6 SISTE · boks-eksplosivhopp 3×6' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program. Bruk ekstra tid — hardaste veka.' },
+      sat: { type: 'rytme', title: 'Bygg 1c · 180+150+120+100+80 (TOPP 1)', detail: '1×180m i 91% · 1×150m i 92% · 1×120m i 93% · 1×100m i 94% · 1×80m i 94–95%. Pause 15 / 14 / 11 / 9–10 / — min. Piggsko. <b>630m total · topp 1 av bølgen.</b>' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  8: {
+    dates: '18.–24. mai', focus: 'Lett ned · hoppetau ute · Arne Risa 20/5 (usikker) · TMG kjem v.9',
+    phase: 'comp1', phaseLabel: 'Stevneperiode 1',
+    days: {
+      mon: { type: 'styrke', title: 'Overkropp + aktivering', detail: 'Full program' },
+      tue: { type: 'fly', title: 'Fly 97% × 3 + 2 kamel', detail: '3×fly 30m. Pause 8–9 min. Etter: 2×kamel. Normal — TMG er trening.' },
+      wed: { type: 'optstev', title: 'Arne Risa (usikker) eller styrke', detail: 'Viss Arne Risa: 200m treningsstevne kl 18. Etter løpet: 2×100m i 92%. | Viss ikkje: Styrke ned volum (Smith 2×4, Heelboks 2×6, Calf 2×5 sek ×3, benk 2×6).' },
+      thu: { type: 'blokk', title: 'Blokk + spenst', detail: '1×10 · 1×20 · 2×30m. Spenst: boks-eksplosivhopp 2×5. <b>Ingen hink.</b>' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program' },
+      sat: { type: 'rytme', title: 'Deload · 120+100+80', detail: 'Viss Arne Risa: 2×100m i 90% lett. Viss ikkje: 1×120m i 92% · 1×100m i 93% · 1×80m i 94%. Pause 10 / 9 / — min. <b>300m total · ned før TMG.</b>' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  9: {
+    dates: '25.–31. mai', focus: 'TMG torsdag 28/5 — slipp opp frå tysdag · normal lørdag 30/5 (lett etter TMG)',
+    phase: 'comp1', phaseLabel: 'TMG-veke',
+    days: {
+      mon: { type: 'styrke', title: 'Overkropp + aktivering', detail: 'Full program' },
+      tue: { type: 'fly', title: 'Fly 97% × 3 + 1 kamel', detail: '3×fly 30m. Pause 8–9 min. Etter: <b>1×kamel berre</b> (slipp opp — TMG torsdag).' },
+      wed: { type: 'styrke', title: 'Styrke vedlikehald (lett)', detail: 'Smith 2×3 · Heelboks 2×5 · Calf 2×4 sek ×3 · Brutal benk 2×5. Lett — TMG i morgon.' },
+      thu: { type: 'stev', title: '🏁 TMG Bergen — 100m', detail: 'Trond Mohn Games. Treningsstevne. Etter løpet: 2–3 ekstra løp (2×60m i 95% eller 2×100m i 92%).', stevne: true },
+      fri: { type: 'rest', title: 'Kvile etter TMG' },
+      sat: { type: 'rytme', title: 'Lett etter TMG · 80 + 80', detail: '2×80m i 92% (treningssko). Pause 7 min. Roleg.' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  10: {
+    dates: '1.–7. juni', focus: 'Framo 6–7/6: 100m + 200m (400m droppa) · slipp opp frå onsdag 3/6',
+    phase: 'comp1', phaseLabel: 'Framo-veke',
+    days: {
+      mon: { type: 'styrke', title: 'Overkropp + aktivering', detail: 'Full program' },
+      tue: { type: 'fly', title: 'Fly 97% × 3 + 1 kamel', detail: '3×fly 30m. Pause 8–9 min. Etter: 1×kamel berre. Skarp og kort.' },
+      wed: { type: 'styrke', title: 'Styrke lett (slipp opp)', detail: 'Smith 2×3 · Heelboks 2×5 · Calf 2×4 sek ×3 · Brutal benk 2×4. Slipp opp — Framo fredag.' },
+      thu: { type: 'aktiv', title: 'Lett aktivering', detail: '2×20m blokkstart. Spar til Framo.' },
+      fri: { type: 'aktiv', title: 'Lett mobilitet', detail: 'Lett mobilitet — spar til Framo.' },
+      sat: { type: 'stev', title: '🏁 Framo-lekene — 100m + 200m', detail: '<b>100m + 200m</b> (400m droppa — ingen treningsgrunnlag). Treningsstevne.', stevne: true },
+      sun: { type: 'stev', title: '🏁 Framo-lekene fortsetter', detail: '100m + 200m. Treningsstevne.', stevne: true }
+    }
+  },
+  11: {
+    dates: '8.–14. juni', focus: 'Tysdag etter Framo: kameler · tilbake i full trening · TOPP 2 lørdag',
+    phase: 'fart', phaseLabel: 'Stevneperiode 2 + Toppveke 2',
+    days: {
+      mon: { type: 'styrke', title: 'Overkropp + aktivering', detail: 'Full program' },
+      tue: { type: 'aktiv', title: 'Ingen fly — kameler + teknikk', detail: 'Etter Framo-helg. 2×kamel feel-basert. Etter: 3–4×20m teknikk frå ståande, 85%.' },
+      wed: { type: 'styrke', title: 'Styrke vedlikehald', detail: 'Smith 2×4 · Heelboks 2×6 · Calf 2×5 sek ×3 · Brutal benk 2×6 · Rygghev/Sidehev 2×8' },
+      thu: { type: 'blokk', title: 'Blokk + spenst', detail: '1×10 · 1×20 · 3×30m. Spenst: boks-eksplosivhopp 2×5' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program' },
+      sat: { type: 'rytme', title: 'Bygg 2 (TOPP 2) · 180+150+120+100+80', detail: '1×180m i 92% · 1×150m i 93–94% · 1×120m i 94% · 1×100m i 95% · 1×80m i 95–96%. Pause 16 / 15–16 / 12 / 10–11 / — min. Piggsko. <b>630m total · same volum som v.7, høgare fart, lengre pausar. Hardaste lørdag.</b>' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  12: {
+    dates: '15.–21. juni', focus: '🔑 LILLEHAMMER — mål for raske tider · 1 kamel · 1 rep mindre',
+    phase: 'peak', phaseLabel: 'Lillehammer-peaking',
+    days: {
+      mon: { type: 'styrke', title: 'Overkropp + aktivering', detail: 'Full program' },
+      tue: { type: 'fly', title: 'Fly 97% × 3 + 1 kamel', detail: '3×fly 30m. Pause 8–9 min. Etter: <b>1×kamel berre.</b> Reduser risiko.' },
+      wed: { type: 'styrke', title: 'Styrke lett', detail: 'Smith 2×3 · Heelboks 2×5 · Calf 2×4 sek ×3 · Brutal benk 2×5 · Rygghev/Sidehev 2×6' },
+      thu: { type: 'blokk', title: 'Blokk + spenst lett', detail: '1×10 · 1×20 · 2×30m skarp. Spenst: boks-eksplosivhopp 2×5.' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program. Kjenn deg ledig.' },
+      sat: { type: 'stev', title: '🏁 Lillehammer — 100m + 200m', detail: '<b>🔑 Mål for raske tider.</b> Første dobbel.', stevne: true },
+      sun: { type: 'stev', title: '🏁 Lillehammer fortsetter', detail: '100m + 200m.', stevne: true }
+    }
+  },
+  13: {
+    dates: '22.–28. juni', focus: 'Tysdag etter Lillehammer: kameler · Boysen 24/6 USIKKER (gul) · feel-basert',
+    phase: 'intens', phaseLabel: 'Intensiv stevneperiode',
+    days: {
+      mon: { type: 'styrke', title: 'Eksplosiv aktivering', detail: 'Dips 2×5 · Nedtrekk 2×6 · Ankel/fot · Couch · Legg · Glute-bridge. Ingen benk.' },
+      tue: { type: 'aktiv', title: 'Ingen fly — kameler', detail: 'Etter Lillehammer-helg. 2×kamel feel-basert.' },
+      wed: { type: 'optstev', title: '🟡 Boysen Memorial (USIKKER)', detail: '<b>Gul:</b> Gå om du føler deg veldig bra. Dropp viss ikkje. Avgjer tysdag etter kamel-økt.' },
+      thu: { type: 'aktiv', title: 'Kvile / lett', detail: 'Viss Boysen: kvile. Viss ikkje: 1×10 · 1×20 · 2×30m + 2×4 boks-eksplosivhopp.' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program. Prioriter legg og hofte.' },
+      sat: { type: 'rytme', title: 'Halde rytme · 100 + 80', detail: '2×100m i 91% + 2×80m i 93%. Pause 8 / 6 min. Hald form.' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  14: {
+    dates: '29. juni – 5. juli', focus: 'Gradvis tilbake · 95% fly + 1 kamel · Joensuu 8/7 neste veke',
+    phase: 'reload', phaseLabel: 'Reload',
+    days: {
+      mon: { type: 'styrke', title: 'Eksplosiv aktivering', detail: 'Dips 2×5 · Nedtrekk 2×6 · Full aktivering' },
+      tue: { type: 'fly', title: 'Fly 95% × 3 + 1 kamel', detail: '3×fly 30m. Pause 7–8 min. Etter: 1×kamel. Reload.' },
+      wed: { type: 'styrke', title: 'Eksplosiv aktivering', detail: 'Smith 2×3 lett · Heelboks 2×5 · Calf 2×4 sek ×3 · Brutal benk 2×4' },
+      thu: { type: 'blokk', title: 'Blokk + spenst', detail: '1×10 · 1×20 · 2×30m. Spenst: boks-eksplosivhopp 2×5' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program' },
+      sat: { type: 'rytme', title: '120 + 80', detail: '1×120m i 92% + 2×80m i 93%. Pause 8–10 / 6 min. Piggsko.' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  15: {
+    dates: '6.–12. juli', focus: 'Joensuu 8/7 (100m) · Tampere 12/7 (200m)',
+    phase: 'comp1', phaseLabel: 'Finland',
+    days: {
+      mon: { type: 'aktiv', title: 'Lett aktivering', detail: '2–3×30m blokkstart lett. Core.' },
+      tue: { type: 'rest', title: 'Kvile / reise', detail: 'Reise til Joensuu.' },
+      wed: { type: 'stev', title: '🏁 Joensuu — 100m', detail: 'Finland.', stevne: true },
+      thu: { type: 'aktiv', title: 'Lett', detail: 'Lett jogg + drills + mobilitet.' },
+      fri: { type: 'aktiv', title: 'Lett', detail: 'Lett jogg + drills + mobilitet.' },
+      sat: { type: 'aktiv', title: 'Aktivering', detail: '2×20m blokkstart. Reise til Tampere.' },
+      sun: { type: 'stev', title: '🏁 Tampere — 200m', detail: 'Finland.', stevne: true }
+    }
+  },
+  16: {
+    dates: '13.–19. juli', focus: 'Reload etter Finland · NM-peaking startar v.17',
+    phase: 'reload', phaseLabel: 'Reload',
+    days: {
+      mon: { type: 'rest', title: 'Kvile etter Finland' },
+      tue: { type: 'fly', title: 'Fly 95% × 3 + 1 kamel', detail: '3×fly 30m. Pause 7–8 min. Etter: 1×kamel.' },
+      wed: { type: 'styrke', title: 'Eksplosiv aktivering', detail: 'Smith 2×4 lett · Heelboks 2×5 · Calf 2×4 sek ×3 · Brutal benk 2×5' },
+      thu: { type: 'blokk', title: 'Blokk + spenst', detail: '1×10 · 1×20 · 2×30m. Spenst: boks-eksplosivhopp 2×5' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program' },
+      sat: { type: 'rytme', title: '100 + 80', detail: '2×100m i 91% + 2×80m i 93%. Pause 7–9 / 6 min.' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  17: {
+    dates: '20.–26. juli', focus: '🏆 NM TRONDHEIM 23.–25. juli · 98% siste fly · KAMEL FØR FLY',
+    phase: 'peak', phaseLabel: 'NM-peaking',
+    days: {
+      mon: { type: 'aktiv', title: 'Aktivering', detail: '3×20m blokkstart lett. Core 10 min.' },
+      tue: { type: 'fly', title: '1 kamel + Fly 98% × 3', detail: '<b>Endra struktur:</b> 1×kamel som primer (CNS-aktivering). Pause 10 min. Deretter 3×fly 30m frå <b>30m innløp</b>, 98%. Pause 10–12 min. Siste kvalitetsøkt før NM.' },
+      wed: { type: 'aktiv', title: 'Lett / reise', detail: 'Sprintoppvarming + drills. Reise til Trondheim.' },
+      thu: { type: 'stev', title: '🏆 NM TRONDHEIM', detail: '100m + 200m. <b>HOVUDMÅL #1.</b>', stevne: true, hov: true },
+      fri: { type: 'stev', title: '🏆 NM TRONDHEIM', detail: '100m + 200m.', stevne: true, hov: true },
+      sat: { type: 'stev', title: '🏆 NM TRONDHEIM', detail: '100m + 200m.', stevne: true, hov: true },
+      sun: { type: 'rest', title: 'Kvile etter NM' }
+    }
+  },
+  18: {
+    dates: '27. juli – 2. aug', focus: 'Reload etter NM · gradvis tilbake',
+    phase: 'reload', phaseLabel: 'Reload etter NM',
+    days: {
+      mon: { type: 'rest', title: 'Kvile' },
+      tue: { type: 'aktiv', title: 'Kameler etter NM', detail: 'Ingen fly. 2×kamel feel-basert.' },
+      wed: { type: 'rest', title: 'Kvile' },
+      thu: { type: 'rest', title: 'Kvile' },
+      fri: { type: 'rest', title: 'Kvile' },
+      sat: { type: 'aktiv', title: 'Lett', detail: 'Sprintoppvarming + drills + 2×100m i 88% treningssko.' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  19: {
+    dates: '3.–9. aug', focus: 'Tilbake i trening · 95% fly · NTNU-start nærmar seg',
+    phase: 'reload', phaseLabel: 'Tilbake i trening',
+    days: {
+      mon: { type: 'styrke', title: 'Eksplosiv aktivering', detail: 'Dips 2×5 · Nedtrekk 2×6 · Full aktivering' },
+      tue: { type: 'fly', title: 'Fly 95% × 3 + 1 kamel', detail: '3×fly 30m. Pause 7–8 min. Etter: 1×kamel. Forsiktig tilbake.' },
+      wed: { type: 'styrke', title: 'Eksplosiv aktivering', detail: 'Smith 2×4 · Heelboks 2×6 · Calf 2×5 sek ×3 · Brutal benk 2×5 · Rygghev 2×6' },
+      thu: { type: 'blokk', title: 'Blokk + spenst', detail: '1×10 · 1×20 · 2×30m forsiktig. Spenst: boks-eksplosivhopp 2×5' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program. Stiv etter NM.' },
+      sat: { type: 'rytme', title: '120 + 100 + 80', detail: '1×120m i 92% · 1×100m i 93% · 1×80m i 94%. Pause 8–10 / 7–9 / 6 min.' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  20: {
+    dates: '10.–16. aug', focus: 'NTNU-start ~10/8 · 97% × 3 (ikkje × 4) · siste skikkelege rytme-økt lørdag',
+    phase: 'peak', phaseLabel: 'Jr. NM-fase 1',
+    days: {
+      mon: { type: 'styrke', title: 'Eksplosiv aktivering (fleksibel)', detail: 'Dips 2×5 · Nedtrekk 2×6 · Full aktivering. Fadderuke — fleksibelt.' },
+      tue: { type: 'fly', title: 'Fly 97% × 3 + 2 kamel', detail: '<b>Endra:</b> 3×fly (ikkje 4) frå 30–32m innløp. Pause 8–9 min. Etter: 2×kamel. Lågare volum gjennom Jr. NM-fasen pga studie.' },
+      wed: { type: 'styrke', title: 'Eksplosiv aktivering', detail: 'Smith 2×4 · Heelboks 2×6 · Calf 2×5 sek ×3 · Brutal benk 2×5 · Rygghev/Sidehev 2×6' },
+      thu: { type: 'blokk', title: 'Blokk + spenst (fast)', detail: '1×10 · 1×20 · 3×30m. Øya stadion. Spenst: boks-eksplosivhopp 2×5' },
+      fri: { type: 'mobil', title: 'Yoga + core (fleksibel)', detail: 'Full mobilitet om tid. Minimum: 90/90 + glute-bridge 15 min.' },
+      sat: { type: 'rytme', title: 'Siste skikkelege · 180+120+80', detail: '<b>Siste skikkelege:</b> 1×180m i 91% · 1×120m i 93% · 2×80m i 94%. Pause 12–14 / 8–10 / 6 min. Piggsko.' },
+      sun: { type: 'rest', title: 'Kvile' }
+    }
+  },
+  21: {
+    dates: '17.–23. aug', focus: 'NM Stafetter 22/8 · Mjøssprinten 23/8 (usikker) · 97% tak · nedtrappande lørdag',
+    phase: 'peak', phaseLabel: 'Jr. NM-fase 2',
+    days: {
+      mon: { type: 'styrke', title: 'Eksplosiv aktivering', detail: 'Dips 2×5 · Nedtrekk 2×6 · Full aktivering' },
+      tue: { type: 'fly', title: 'Fly 97% × 3 + 2 kamel', detail: '3×fly frå 30–32m innløp, 97%. Pause 8–9 min. Etter: 2×kamel. Skarp og kort.' },
+      wed: { type: 'styrke', title: 'Eksplosiv aktivering', detail: 'Smith 2×3 · Heelboks 2×5 · Calf 2×4 sek ×3 · Brutal benk 2×4' },
+      thu: { type: 'blokk', title: 'Blokk + spenst', detail: '1×10 · 1×20 · 2×30m. Spenst: boks-eksplosivhopp 2×5. <b>Siste plyo før Jr. NM.</b>' },
+      fri: { type: 'mobil', title: 'Yoga + core', detail: 'Full program. Avgjer Mjøssprinten etter forma.' },
+      sat: { type: 'stev', title: 'NM Stafetter Moelven', detail: '4×100m.', stevne: true },
+      sun: { type: 'optstev', title: 'Mjøssprinten (usikker)', detail: '100m/200m — avgjer fredag 21/8.' }
+    }
+  },
+  22: {
+    dates: '24.–30. aug', focus: '🏆 JR. NM OSLO 28.–30. aug · 97% siste fly · KAMEL FØR FLY',
+    phase: 'peak', phaseLabel: 'Jr. NM finale',
+    days: {
+      mon: { type: 'aktiv', title: 'Aktivering', detail: '3×20m blokkstart + drills. Lett og skarp.' },
+      tue: { type: 'fly', title: '1 kamel + Fly 97% × 3', detail: '<b>Endra struktur:</b> 1×kamel som primer. Pause 10 min. Deretter 3×fly 30m frå 30–32m innløp, 97%. Pause 9–10 min. Siste kvalitetsøkt før Jr. NM.' },
+      wed: { type: 'aktiv', title: 'Lett', detail: 'Sprintoppvarming + drills + 2×30m akselerasjon. Mobilitet.' },
+      thu: { type: 'rest', title: 'Kvile / reise', detail: 'Reise til Oslo.' },
+      fri: { type: 'aktiv', title: 'Lett mobilitet', detail: 'Lett mobilitet på Bislett. Kjenn deg ledig.' },
+      sat: { type: 'stev', title: '🏆 JR. NM OSLO', detail: '100m + 200m. <b>HOVUDMÅL #2.</b>', stevne: true, hov: true },
+      sun: { type: 'stev', title: '🏆 JR. NM OSLO', detail: '100m + 200m.', stevne: true, hov: true }
+    }
+  }
+};
+
+// STEVNER
+const STEVNER = [
+  { date: '2026-05-09', name: 'Holmenkollstafetten', type: 'Stafett (siste etappe)', tag: 'stev' },
+  { date: '2026-05-20', name: 'Arne Risa Classic', type: '200m (usikker)', tag: 'opt' },
+  { date: '2026-05-28', name: 'TMG Bergen', type: '100m', tag: 'stev' },
+  { date: '2026-06-06', name: 'Framo-lekene', type: '100m + 200m', tag: 'stev' },
+  { date: '2026-06-20', name: 'Lillehammerlekene', type: '🔑 100m + 200m — raske tider', tag: 'main' },
+  { date: '2026-06-24', name: 'Boysen Memorial', type: '200m (usikker — gul)', tag: 'opt' },
+  { date: '2026-07-08', name: 'Joensuu, Finland', type: '100m', tag: 'stev' },
+  { date: '2026-07-12', name: 'Tampere, Finland', type: '200m', tag: 'stev' },
+  { date: '2026-07-23', name: 'NM Trondheim', type: '🏆 100m + 200m — HOVUDMÅL #1', tag: 'hov' },
+  { date: '2026-08-22', name: 'NM Stafetter Moelven', type: '4×100m', tag: 'stev' },
+  { date: '2026-08-23', name: 'Mjøssprinten', type: '100m/200m (usikker)', tag: 'opt' },
+  { date: '2026-08-28', name: 'Jr. NM Oslo', type: '🏆 100m + 200m — HOVUDMÅL #2', tag: 'hov' }
+];
+
+// FOOD PLAN (per weekday, with rotation A/B/C for mon-thu dinners)
+const FOOD = {
+  mon: {
+    label: 'Måndag — Core + overkropp',
+    meals: [
+      { time: '07:00', name: 'Havregraut + egg + bær', desc: '100g havre · 3 egg røregg · 100g blandabær · 1 ts honning', suppl: 'Kalsium · Omega-3 · Folsyre · D-vit' },
+      { time: '10:00', name: 'Skyr + grovbrød', desc: '200g skyr naturell · 1–2 skiver grovbrød · agurk og tomat' },
+      { time: '12:30', name: 'Kylling + ris + brokkoli', desc: '180g kyllingbryst (rå) · 200g ris (kokt) · brokkoli rikelig · sitron' },
+      { time: '15:30', name: 'Banan + skyr', desc: '1 stor banan · 150g skyr' },
+      { time: '17:00', name: 'Middag (rotasjon)', desc: '__DINNER__', suppl: 'C-vit 30 min før trening (18:00)' },
+      { time: '21:00', name: 'Skyr + bær', desc: '200g skyr · 100g bær', suppl: 'Magnesium + Jern + lita C-vit' }
+    ],
+    dinners: {
+      A: 'Kyllingwok — 180g kyllingbryst · paprika + løk + soyasaus + ingefær · 150g nudlar (kokt). Lett og raskt.',
+      B: 'Kylling + søtpotet — 180g kyllingbryst · 250g søtpotet (kokt) · brokkoli rikelig · urter',
+      C: 'Kyllingpasta — 180g kyllingbryst · 200g pasta (kokt) · tomatsaus + spinat + basilikum'
+    },
+    macros: { p: 185, k: 270, f: 55, kcal: 2380 }
+  },
+  tue: {
+    label: 'Tysdag — Fartøkt (høgast karbo)',
+    meals: [
+      { time: '07:00', name: 'Havregraut + egg + bær — stor', desc: '120g havre · 3 egg røregg · 100g bær · 1 ts honning', suppl: 'Kalsium · Omega-3 · Folsyre · D-vit' },
+      { time: '10:00', name: 'Grovbrød + kylling', desc: '2 skiver grovbrød · 100g kylling · tomat/agurk' },
+      { time: '12:00', name: 'Ris + kylling + grønt — stor', desc: '200g kyllingbryst (rå) · 220g ris (kokt) · brokkoli/paprika rikelig' },
+      { time: '15:00', name: 'Skyr + banan', desc: '200g skyr · 1–2 banan' },
+      { time: '17:00', name: 'Middag (rotasjon)', desc: '__DINNER__', suppl: 'C-vit 30 min før trening (18:00)' },
+      { time: '~20:30', name: 'Restitusjon etter trening', desc: '200g skyr + 1 banan — innan 30 min etter trening' },
+      { time: '21:15', name: 'Gresk yogurt vanilje', desc: '150g gresk yogurt vanilje · litt bær', suppl: 'Magnesium + Jern + lita C-vit' }
+    ],
+    dinners: {
+      A: 'Pasta bolognese — 180g storfe kjøttdeig · 200g pasta (kokt) · tomatsaus + spinat. Lett — ikkje krembasert.',
+      B: 'Kylling + ris + paprikasaus — 180g kyllingbryst · 220g ris (kokt) · lett paprikasaus (ikkje krembasert) · grønt',
+      C: 'Kjøttdeig-bowl — 180g storfe kjøttdeig · 220g ris (kokt) · salsa + salat + litt rømme'
+    },
+    macros: { p: 210, k: 310, f: 52, kcal: 2540 }
+  },
+  wed: {
+    label: 'Onsdag — Styrke',
+    meals: [
+      { time: '07:30', name: 'Havregraut + skyr', desc: '100g havre · 150g skyr rørt inn · bær · honning', suppl: 'Kalsium · Omega-3 · Folsyre · D-vit' },
+      { time: '10:00', name: 'Gresk yogurt vanilje + frukt', desc: '200g gresk yogurt vanilje · 1 banan · litt granola' },
+      { time: '12:30', name: 'Kylling + søtpotet + grønt', desc: '180g kylling (rå) · 220g søtpotet (kokt) · spinat/grønt · krydder' },
+      { time: '15:30', name: 'Skyr + grovbrød', desc: '200g skyr · 1 skive grovbrød' },
+      { time: '17:00', name: 'Middag (rotasjon)', desc: '__DINNER__', suppl: 'C-vit 30 min før trening (18:00)' },
+      { time: '20:30', name: 'Skyr + bær', desc: '200g skyr · bær', suppl: 'Magnesium + Jern + lita C-vit' }
+    ],
+    dinners: {
+      A: 'Kyllinggryte — 200g kyllinglår · tomatsaus + mild curry · 200g ris (kokt) · spinat. Lag i gryte.',
+      B: 'Kylling i ovn + potet — 200g kyllingbryst · 250g potet (kokt) · brokkoli/grønt rikelig',
+      C: 'Storfe + grønsakssupé — 180g storfe kjøttdeig · 2 skiver grovbrød · gulrot + løk + selleri'
+    },
+    macros: { p: 178, k: 270, f: 52, kcal: 2310 }
+  },
+  thu: {
+    label: 'Torsdag — Blokkøkt (høg karbo)',
+    meals: [
+      { time: '07:00', name: 'Havregraut + egg + bær', desc: '120g havre · 3 egg røregg · bær · honning', suppl: 'Kalsium · Omega-3 · Folsyre · D-vit' },
+      { time: '10:00', name: 'Skyr + grovbrød', desc: '200g skyr · 1–2 skiver grovbrød · tomat' },
+      { time: '12:00', name: 'Kylling + ris + grønt — stor', desc: '200g kylling (rå) · 220g ris (kokt) · brokkoli/paprika rikelig' },
+      { time: '15:00', name: 'Banan + skyr', desc: '1–2 banan · 150g skyr' },
+      { time: '17:00', name: 'Middag (rotasjon)', desc: '__DINNER__', suppl: 'C-vit 30 min før trening (18:00)' },
+      { time: '~20:30', name: 'Restitusjon etter trening', desc: '200g skyr + 1 banan — innan 30 min etter trening' },
+      { time: '21:15', name: 'Gresk yogurt vanilje', desc: '150g gresk yogurt vanilje', suppl: 'Magnesium + Jern + lita C-vit' }
+    ],
+    dinners: {
+      A: 'Biff + potet + brunsaus — 180g biff · 280g potet (kokt) · lett brunsaus · brokkoli',
+      B: 'Kylling + ris + soyaglasur — 180g kyllingbryst · 220g ris (kokt) · lett soyaglasur · grønt',
+      C: 'Kjøttdeig + pasta — 180g storfe kjøttdeig · 200g pasta (kokt) · tomatsaus + grønt'
+    },
+    macros: { p: 205, k: 305, f: 50, kcal: 2510 }
+  },
+  fri: {
+    label: 'Fredag — 🌮 TACO (alltid)',
+    meals: [
+      { time: '07:30', name: 'Egg + havregraut', desc: '3–4 egg omelett med spinat og paprika · 80g havre · bær', suppl: 'Kalsium · Omega-3 · Folsyre · D-vit' },
+      { time: '10:00', name: 'Skyr + bær + banan', desc: '200g skyr · 100g bær · 1 banan' },
+      { time: '12:30', name: 'Kylling + ris + grønt', desc: '180g kylling (rå) · 180g ris (kokt) · grønt rikelig' },
+      { time: '15:30', name: 'Skyr + grovbrød', desc: '200g skyr · 1 skive grovbrød' },
+      { time: '18:00', name: '🌮 TACO', desc: '4–5 mjuke tortilla · 200g kylling tacokrydra · salsa · rømme (moderat) · litt ost · salat/tomat/paprika' },
+      { time: '21:00', name: 'Skyr naturell', desc: '200g skyr', suppl: 'Magnesium + Jern + lita C-vit' }
+    ],
+    macros: { p: 185, k: 280, f: 62, kcal: 2480 }
+  },
+  sat: {
+    label: 'Laurdag — 🥩 BIFF (alltid) + Rytmeøkt',
+    meals: [
+      { time: '07:30', name: 'Havregraut + egg + bær — stor', desc: '120g havre · 3 egg røregg · 100g bær · honning', suppl: 'Kalsium · Omega-3 · Folsyre · D-vit' },
+      { time: '09:30', name: 'Banan + skyr (pre-trening)', desc: '1–2 banan · 150g skyr', suppl: 'C-vit 30 min før trening (10:30)' },
+      { time: '~13:00', name: 'Restitusjon etter trening', desc: '200g skyr + 1 banan — innan 30 min etter trening' },
+      { time: '14:00', name: 'Stor restitusjonslunsj', desc: '200g kylling (rå) · 200g ris (kokt) · brokkoli/grønt rikelig' },
+      { time: '16:30', name: 'Gresk yogurt vanilje + frukt', desc: '200g gresk yogurt vanilje · 1 banan' },
+      { time: '19:00', name: '🥩 BIFF — Alltid laurdag!', desc: '220g biff (rå) — indrefilet, flatbiff eller entrecôte · 280g kokt potet · lett brunsaus · brokkoli/grønt' },
+      { time: '21:00', name: 'Skyr + bær', desc: '200g skyr · bær', suppl: 'Magnesium + Jern + lita C-vit' }
+    ],
+    macros: { p: 215, k: 310, f: 58, kcal: 2620 }
+  },
+  sun: {
+    label: 'Søndag — 🍛 Tandori / 🍖 Kjøttkaker',
+    meals: [
+      { time: '08:30', name: 'Egg + havregraut', desc: '3 egg røregg · 80g havre · bær', suppl: 'Kalsium · Omega-3 · Folsyre · D-vit' },
+      { time: '11:00', name: 'Skyr + banan', desc: '200g skyr · 1 banan' },
+      { time: '13:30', name: 'Kylling + potet + grønt', desc: '180g kylling (rå) · 200g potet (kokt) · brokkoli/spinat rikelig' },
+      { time: '16:00', name: 'Gresk yogurt vanilje + frukt', desc: '200g gresk yogurt vanilje · 1 eple eller banan' },
+      { time: '18:30', name: 'Søndagsmiddag (vekslar)', desc: '__SUNDAY__' },
+      { time: '20:30', name: 'Skyr naturell', desc: '200g skyr', suppl: 'Magnesium + Jern + lita C-vit' }
+    ],
+    sunday: {
+      odd: '🍛 Tandori kylling — 250g kyllinglår marinert i tandoripasta + yogurt · 200g basmatiris · naan · raita.',
+      even: '🍖 Kjøttkaker — 250g kjøttkaker storfe · lett brunsaus · 250g potet · erter + gulrot. Norsk husmanskost.'
+    },
+    macros: { p: 180, k: 255, f: 52, kcal: 2220 }
+  }
+};
+
+// ============================================
+// HELPERS
+// ============================================
+const DAY_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+const DAY_NAMES = ['Søndag', 'Måndag', 'Tysdag', 'Onsdag', 'Torsdag', 'Fredag', 'Laurdag'];
+const MONTH_NAMES = ['januar','februar','mars','april','mai','juni','juli','august','september','oktober','november','desember'];
+
+function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+function formatDate(d) {
+  return `${DAY_NAMES[d.getDay()]} ${d.getDate()}. ${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function formatDateShort(d) {
+  return `${pad(d.getDate())}.${pad(d.getMonth()+1)}`;
+}
+
+function isoDate(d) {
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+}
+
+// Plan week number from date — uses internal week numbering (3-22)
+// Week 3 starts Monday April 13, 2026
+function getPlanWeek(d) {
+  const start = new Date('2026-04-13'); // Monday week 3
+  const dayMs = 24*60*60*1000;
+  const diffDays = Math.floor((d - start) / dayMs);
+  if (diffDays < 0) return null;
+  const week = 3 + Math.floor(diffDays / 7);
+  return week >= 3 && week <= 22 ? week : null;
+}
+
+// Get rotation week (A/B/C) based on ISO week number
+function getRotation(d) {
+  const target = new Date(d.valueOf());
+  target.setHours(0,0,0,0);
+  target.setDate(target.getDate() + 3 - (target.getDay() + 6) % 7);
+  const week1 = new Date(target.getFullYear(), 0, 4);
+  const isoWeek = 1 + Math.round(((target - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+  const r = isoWeek % 3;
+  return r === 0 ? 'A' : r === 1 ? 'B' : 'C';
+}
+
+// Sunday rotation: odd ISO week = tandori, even = kjøttkaker
+function getSundayMeal(d) {
+  const target = new Date(d.valueOf());
+  target.setHours(0,0,0,0);
+  target.setDate(target.getDate() + 3 - (target.getDay() + 6) % 7);
+  const week1 = new Date(target.getFullYear(), 0, 4);
+  const isoWeek = 1 + Math.round(((target - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+  return isoWeek % 2 === 1 ? FOOD.sun.sunday.odd : FOOD.sun.sunday.even;
+}
+
+function getDayKey(d) {
+  return DAY_KEYS[d.getDay()];
+}
+
+// ============================================
+// STATE
+// ============================================
+let currentDate = new Date();
+currentDate.setHours(0,0,0,0);
+
+// Force date to be within season if outside
+const seasonStart = new Date('2026-04-13');
+const seasonEnd = new Date('2026-08-30');
+if (currentDate < seasonStart) currentDate = new Date(seasonStart);
+if (currentDate > seasonEnd) currentDate = new Date(seasonEnd);
+
+// ============================================
+// RENDER FUNCTIONS
+// ============================================
+function renderTodayView() {
+  const dayKey = getDayKey(currentDate);
+  const planWeek = getPlanWeek(currentDate);
+  const week = planWeek ? PLAN[planWeek] : null;
+  const dayPlan = week ? week.days[dayKey] : null;
+
+  // Day nav
+  document.getElementById('navDay').textContent = formatDate(currentDate);
+  if (week) {
+    document.getElementById('navWeek').textContent = `Veke ${planWeek} · ${week.dates}`;
+  } else {
+    document.getElementById('navWeek').textContent = 'Utanfor sesongen';
+  }
+
+  // Today jump button
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const todayJump = document.getElementById('todayJump');
+  if (currentDate.getTime() !== today.getTime()) {
+    todayJump.classList.remove('hidden');
+  } else {
+    todayJump.classList.add('hidden');
+  }
+
+  // Brand date
+  document.getElementById('brandDate').textContent = formatDate(today);
+
+  // Countdown
+  renderCountdown();
+
+  // Training
+  renderTraining(dayPlan, week);
+
+  // Food
+  renderFood(dayKey);
+
+  // Sjurlog link visibility
+  renderSjurlogLink(dayPlan, week);
+}
+
+function renderCountdown() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const upcoming = STEVNER
+    .map(s => ({ ...s, dateObj: new Date(s.date) }))
+    .filter(s => s.dateObj >= today)
+    .slice(0, 3);
+
+  const cd = document.getElementById('countdowns');
+  cd.innerHTML = upcoming.map(s => {
+    const days = Math.round((s.dateObj - today) / (24*60*60*1000));
+    const isHov = s.tag === 'main' || s.tag === 'hov';
+    return `<div class="cd ${isHov ? 'hov' : ''}">
+      <div class="cd-days">${days === 0 ? 'I DAG' : days}</div>
+      <div class="cd-lbl">${days === 0 ? '' : 'dagar til'}</div>
+      <div class="cd-name">${s.name}</div>
+      <div class="cd-date">${formatDateShort(s.dateObj)}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderTraining(dayPlan, week) {
+  const head = document.getElementById('trainHead');
+  const body = document.getElementById('trainBody');
+
+  if (!week || !dayPlan) {
+    head.className = 'card-head ch-info';
+    head.textContent = 'INGEN PLAN';
+    body.innerHTML = '<div style="color:var(--text2);font-style:italic">Utanfor sesongen.</div>';
+    return;
+  }
+
+  // Detect stevne or rest
+  if (dayPlan.stevne || dayPlan.type === 'stev') {
+    head.className = 'card-head ch-stev';
+    head.textContent = dayPlan.hov ? '🏆 HOVUDMÅL' : 'STEVNE I DAG';
+  } else if (dayPlan.type === 'rest') {
+    head.className = 'card-head ch-info';
+    head.textContent = 'KVILEDAG';
+  } else if (dayPlan.type === 'fly' || dayPlan.type === 'rytme' || dayPlan.type === 'blokk') {
+    head.className = 'card-head ch-train';
+    head.textContent = 'DAGENS HOVUDØKT';
+  } else {
+    head.className = 'card-head ch-train';
+    head.textContent = 'DAGENS TRENING';
+  }
+
+  // Build content
+  const phaseTag = `<span class="tag tag-${week.phase}">${week.phaseLabel}</span>`;
+  const focusLine = `<div style="font-size:12px;color:var(--text2);font-style:italic;margin-bottom:12px">${week.focus}</div>`;
+
+  let woHtml = '';
+  if (dayPlan.detail) {
+    const typeColor = {
+      fly: 'var(--red)', rytme: 'var(--green)', blokk: 'var(--blue)',
+      styrke: 'var(--purple)', mobil: '#8B5CF6', stev: 'var(--red)',
+      aktiv: 'var(--teal)', optstev: 'var(--amber)', rest: 'var(--text3)'
+    }[dayPlan.type] || 'var(--purple)';
+    woHtml = `<div class="wo" style="border-left-color:${typeColor}">
+      <div class="wo-type" style="color:${typeColor}">${dayPlan.title}</div>
+      <div class="wo-detail">${dayPlan.detail}</div>
+    </div>`;
+  } else {
+    woHtml = `<div class="wo" style="border-left-color:var(--text3)">
+      <div class="wo-type">${dayPlan.title}</div>
+    </div>`;
+  }
+
+  body.innerHTML = phaseTag + focusLine + woHtml;
+}
+
+function renderFood(dayKey) {
+  const food = FOOD[dayKey];
+  const body = document.getElementById('foodBody');
+
+  if (!food) {
+    body.innerHTML = '';
+    return;
+  }
+
+  const rotation = getRotation(currentDate);
+  let mealsHtml = '';
+  
+  food.meals.forEach(m => {
+    let desc = m.desc;
+    if (desc === '__DINNER__' && food.dinners) {
+      desc = `<b>Veke ${rotation}:</b> ${food.dinners[rotation]}`;
+    }
+    if (desc === '__SUNDAY__') {
+      desc = getSundayMeal(currentDate);
+    }
+    mealsHtml += `<div class="meal">
+      <div class="meal-time">${m.time}</div>
+      <div class="meal-name">${m.name}</div>
+      <div class="meal-desc">${desc}</div>
+      ${m.suppl ? `<span class="meal-suppl">${m.suppl}</span>` : ''}
+    </div>`;
+  });
+
+  const macroHtml = `<div class="macros">
+    <div class="macro mp"><div class="macro-val">${food.macros.p}g</div><div class="macro-lbl">Protein</div></div>
+    <div class="macro mk"><div class="macro-val">${food.macros.k}g</div><div class="macro-lbl">Karbo</div></div>
+    <div class="macro mf"><div class="macro-val">${food.macros.f}g</div><div class="macro-lbl">Feitt</div></div>
+    <div class="macro mc"><div class="macro-val">${food.macros.kcal}</div><div class="macro-lbl">kcal</div></div>
+  </div>`;
+
+  body.innerHTML = mealsHtml + macroHtml;
+}
+
+function renderSjurlogLink(dayPlan, week) {
+  const sjurlogLink = document.getElementById('sjurlogLink');
+  if (!week || !dayPlan || dayPlan.type === 'rest') {
+    sjurlogLink.classList.add('hidden');
+  } else {
+    sjurlogLink.classList.remove('hidden');
+  }
+}
+
+// SEASON VIEW
+function renderSeasonView() {
+  // Phase bar
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const totalWeeks = 20; // weeks 3-22
+  const currentWeek = getPlanWeek(today);
+  const phaseHtml = Array.from({length: totalWeeks}, (_, i) => {
+    const wnum = 3 + i;
+    const w = PLAN[wnum];
+    const isCurrent = wnum === currentWeek;
+    return `<div class="phase-seg ${isCurrent ? 'current' : w.phase}" title="Veke ${wnum}: ${w.dates}"></div>`;
+  }).join('');
+  document.getElementById('phaseBar').innerHTML = phaseHtml;
+
+  // Season countdowns
+  const goals = STEVNER.filter(s => s.tag === 'main' || s.tag === 'hov').map(s => ({...s, dateObj: new Date(s.date)}));
+  document.getElementById('seasonCountdowns').innerHTML = goals.map(s => {
+    const days = Math.round((s.dateObj - today) / (24*60*60*1000));
+    const isHov = s.tag === 'hov';
+    return `<div class="cd ${isHov ? 'hov' : ''}">
+      <div class="cd-days">${days < 0 ? '✓' : days}</div>
+      <div class="cd-lbl">${days < 0 ? 'gjennomført' : 'dagar'}</div>
+      <div class="cd-name">${s.name}</div>
+      <div class="cd-date">${formatDateShort(s.dateObj)}</div>
+    </div>`;
+  }).join('');
+
+  // Week list
+  const weekList = document.getElementById('weekList');
+  let weeksHtml = '';
+  for (let w = 3; w <= 22; w++) {
+    const week = PLAN[w];
+    const isCurrent = w === currentWeek;
+    const hasStevne = Object.values(week.days).some(d => d.stevne);
+    weeksHtml += `<div class="week-row ${isCurrent ? 'current' : ''} ${hasStevne ? 'has-stevne' : ''}" data-week="${w}">
+      <div class="week-num">VEKE ${w}</div>
+      <div class="week-info">
+        <div class="week-dates">${week.dates}</div>
+        <div class="week-focus">${week.focus}</div>
+      </div>
+      <div class="week-marker">
+        <span class="tag tag-${week.phase}">${week.phaseLabel}</span>
+      </div>
+    </div>`;
+  }
+  weekList.innerHTML = weeksHtml;
+  weekList.querySelectorAll('.week-row').forEach(row => {
+    row.addEventListener('click', () => {
+      const wnum = parseInt(row.dataset.week);
+      openWeekModal(wnum);
+    });
+  });
+
+  // Stevne table
+  const stevneRows = STEVNER.map(s => {
+    const dt = new Date(s.date);
+    let badge = '';
+    if (s.tag === 'hov') badge = '<span class="tag" style="background:var(--red);color:#fff">🏆 HOVUDMÅL</span>';
+    else if (s.tag === 'main') badge = '<span class="tag" style="background:#FEF9C3;color:#713F12">🔑 KEY</span>';
+    else if (s.tag === 'opt') badge = '<span class="tag tag-opt">Usikker</span>';
+    else badge = '<span class="tag tag-comp">Stevne</span>';
+    return `<tr><td>${formatDateShort(dt)}</td><td><b>${s.name}</b></td><td>${s.type}</td><td>${badge}</td></tr>`;
+  }).join('');
+  document.getElementById('stevneTable').innerHTML = `<tr><th>Dato</th><th>Stevne</th><th>Greiner</th><th></th></tr>${stevneRows}`;
+}
+
+function openWeekModal(wnum) {
+  const week = PLAN[wnum];
+  let html = `<h2 style="font-size:18px;margin-bottom:4px">Veke ${wnum}</h2>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px">${week.dates}</div>
+    <span class="tag tag-${week.phase}">${week.phaseLabel}</span>
+    <div style="font-size:12px;color:var(--text2);font-style:italic;margin:12px 0">${week.focus}</div>`;
+  
+  const dayOrder = ['mon','tue','wed','thu','fri','sat','sun'];
+  const dayLabels = ['Måndag','Tysdag','Onsdag','Torsdag','Fredag','Laurdag','Søndag'];
+  
+  dayOrder.forEach((dk, i) => {
+    const d = week.days[dk];
+    if (!d) return;
+    const typeColor = {
+      fly: 'var(--red)', rytme: 'var(--green)', blokk: 'var(--blue)',
+      styrke: 'var(--purple)', mobil: '#8B5CF6', stev: 'var(--red)',
+      aktiv: 'var(--teal)', optstev: 'var(--amber)', rest: 'var(--text3)'
+    }[d.type] || 'var(--purple)';
+    html += `<div class="wo" style="border-left-color:${typeColor};margin-top:10px">
+      <div class="wo-type" style="color:${typeColor}">${dayLabels[i]} — ${d.title}</div>
+      ${d.detail ? `<div class="wo-detail">${d.detail}</div>` : ''}
+    </div>`;
+  });
+
+  document.getElementById('modalContent').innerHTML = html;
+  document.getElementById('weekModal').classList.add('open');
+}
+
+// KOST VIEW
+function renderKostView() {
+  const today = new Date();
+  document.getElementById('currentRotation').textContent = getRotation(today);
+  
+  const rotHtml = ['mon','tue','wed','thu'].map(dk => {
+    const f = FOOD[dk];
+    return `<div class="princ-box" style="background:var(--bg3);color:var(--text);border-left-color:var(--purple)">
+      <div style="font-weight:700;margin-bottom:6px">${f.label}</div>
+      <div style="font-size:12px;line-height:1.7">
+        <b>Veke A:</b> ${f.dinners.A}<br>
+        <b>Veke B:</b> ${f.dinners.B}<br>
+        <b>Veke C:</b> ${f.dinners.C}
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('kostRotation').innerHTML = rotHtml;
+}
+
+// ============================================
+// VIEW SWITCHING
+// ============================================
+function switchView(view) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === view));
+  document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+  document.getElementById('view-' + view).classList.remove('hidden');
+  
+  if (view === 'season') renderSeasonView();
+  else if (view === 'kost') renderKostView();
+}
+
+// ============================================
+// EVENT LISTENERS
+// ============================================
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => switchView(tab.dataset.view));
+});
+
+document.getElementById('prevDay').addEventListener('click', () => {
+  currentDate.setDate(currentDate.getDate() - 1);
+  renderTodayView();
+});
+
+document.getElementById('nextDay').addEventListener('click', () => {
+  currentDate.setDate(currentDate.getDate() + 1);
+  renderTodayView();
+});
+
+document.getElementById('todayJump').addEventListener('click', () => {
+  currentDate = new Date();
+  currentDate.setHours(0,0,0,0);
+  renderTodayView();
+});
+
+document.getElementById('closeModal').addEventListener('click', () => {
+  document.getElementById('weekModal').classList.remove('open');
+});
+
+document.getElementById('weekModal').addEventListener('click', (e) => {
+  if (e.target.id === 'weekModal') {
+    document.getElementById('weekModal').classList.remove('open');
+  }
+});
+
+// Swipe gestures for day nav
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  if (!document.getElementById('view-today').classList.contains('hidden')) {
+    const diff = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(diff) > 80) {
+      if (diff > 0) document.getElementById('prevDay').click();
+      else document.getElementById('nextDay').click();
+    }
+  }
+});
+
+// INIT
+renderTodayView();
+</script>
+</body>
+</html>
